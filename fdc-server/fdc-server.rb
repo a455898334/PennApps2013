@@ -29,6 +29,7 @@ end
 # End Gist
 
 get '/users' do
+  content_type :json
   unless params[:lat] and params[:long] and params[:radius]
     return {success: false}.to_json
   end
