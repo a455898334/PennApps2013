@@ -2,6 +2,8 @@ body{
 	background-image:url('../img/stripe.png');
 	background-position:center;
 	background-color:#5FC0CE;
+	margin:0;
+	padding:0;
 }
 #title{
 	color:#FFFFFF;

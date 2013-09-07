@@ -1,7 +1,37 @@
 <html>
 	<head>
+		<script type="text/javascript" src="../static/js/jquery-2.0.2.min.js"></script>
 		<link rel="icon" type="image/png" href="../static/img/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="../static/css/amigo.css">
+		<script>
+			var map;
+			var markersArray = [];
+			var newMark;
+
+			function initialize() {
+				var a = new google.maps.LatLng({{lat}},{{lon}});
+				var mapOptions = {
+					zoom: 11	,
+					center: a,
+					mapTypeId: google.maps.MapTypeId.HYBRID
+				};
+				map =  new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+				{% for x in MessageList %}
+				newMark = new google.maps.LatLng({{x[1]}},{{x[0]}});
+				addMarker(newMark, "{{x[2]}}")	;
+				{% endfor %}
+				infowindow = new google.maps.InfoWindow({  	content: "holding..."  });
+				for (var i   = 0; i < markersArray.length; i++) {
+				  var marker = markersArray[i];
+				  google.maps.event.addListener(marker, 'click', function () {
+					infowindow.setContent(this.user);
+					infowindow.open(map, this);
+					map.setCenter(this.getPosition());
+				  });	 
+				}
+				
+			}
+		</script>
 	</head>
 	<body>
 		<div id="masthead">
@@ -11,11 +41,8 @@
 		</div>
 		<br>
 		<div id="content">
-			<div id="map">
-				<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjedh5W9golD6lhg9m81RgI20AF46wdXA&sensor=true"></script>
-			</div>
-			<div id="list">
-			</div>
+			<div id="map" onload="initialize()"></div>
+			<div id="list"></div>
 		</div>
 	</body>
 </html>
