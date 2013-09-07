@@ -1,5 +1,6 @@
 body{
-	background-image:"../static/img/background.JPG"
+	background-image:url('../img/background.jpg');
+	background-position:center;
 }
 #title{
 	color:blue;
