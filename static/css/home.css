@@ -1,10 +1,33 @@
 body{
-	background-image:url('../img/homebackground.jpg');
+	background-image:url('../img/stripe.png');
 	background-position:center;
+	background-color:#5FC0CE;
 }
 #title{
-	color:white;
-	font-family:"Arial Black", Gadget, sans-serif;
-	font-size:40pt;
+	color:#FFFFFF;
+	font-family: 'Open Sans', sans-serif;
+	font-size:70pt;
 	text-align:center;
+}
+#descriptionbound{
+	background-color:rgba(0,0,0,0.25);
+	margin:0 auto;
+	width:75%;
+	border-radius: 15px;
+	max-width:600px;
+	min-width:300px
+}
+#description{
+	color:white;
+	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size:13pt;
+	width:70%;
+	margin:0 auto;
+	margin-top:10%;
+}
+#orangetext{
+	color:#FFD373;
+}
+#greentext{
+	color:#09FF00;
 }
