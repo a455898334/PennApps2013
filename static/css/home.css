@@ -8,9 +8,11 @@ body{
 	font-family: 'Open Sans', sans-serif;
 	font-size:70pt;
 	text-align:center;
+	text-shadow: 2px 2px rgba(0,0,0,0.25);
+
 }
 #descriptionbound{
-	background-color:rgba(0,0,0,0.25);
+	background-color:rgba(0,0,0,0.5);
 	margin:0 auto;
 	width:75%;
 	border-radius: 15px;
@@ -24,6 +26,7 @@ body{
 	width:70%;
 	margin:0 auto;
 	margin-top:10%;
+	text-align:justify;
 }
 #orangetext{
 	color:#FFD373;
