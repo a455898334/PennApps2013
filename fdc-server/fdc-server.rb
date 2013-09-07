@@ -41,7 +41,7 @@ get '/users' do
   all_user_ids.each do |id|
     user_data = redis.hmget id, 'lat', 'long', 'last_updated'
     user = {lat: user_data[0], long: user_data[1], last_updated: user_data[2]}
-    dist = distance [lat.to_f, long.to_f], [user[0].to_f, user[1].to_f]
+    dist = distance [lat.to_f, long.to_f], [user[:lat].to_f, user[:long].to_f]
     if dist < radius.to_f
       user[:id] = id[5..-1]
       users_in_radius << user
