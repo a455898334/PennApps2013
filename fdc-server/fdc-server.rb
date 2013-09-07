@@ -77,3 +77,24 @@ put '/user/:id' do
     'last_updated', last_updated
   {success: true}.to_json
 end
+
+get '/user/:id/fb_access_token' do
+  content_type :json
+  id = "user:#{params[:id]}"
+  token = redis.hget id, 'fb_access_token'
+  unless token
+    return {success: false}.to_json
+  end
+  {success: true, token: token}.to_json
+end
+
+put '/user/:id/fb_access_token' do
+  content_type :json
+  id = "user:#{params[:id]}"
+  unless params[:token]
+    return {success: false}.to_json
+  end
+  token = params[:token]
+  redis.hset id, 'fb_access_token', token
+  {success: true}.to_json
+end
