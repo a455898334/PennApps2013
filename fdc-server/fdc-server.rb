@@ -36,12 +36,12 @@ get '/users' do
   all_user_ids = redis.keys 'user:*'
   all_user_ids.each do |id|
     user = redis.hgetall id
-    dist = distance [lat.to_i, long.to_i], [user['lat'].to_i, user['long'].to_i]
+    dist = distance [lat.to_f, long.to_f], [user['lat'].to_f, user['long'].to_f]
     if dist < radius.to_i
       user[:id] = id[5..-1]
       users_in_radius << user
     end
-    puts dist, radius.to_i
+    puts "Dist: #{dist}"
   end
   {success: true, users_in_radius: users_in_radius}.to_json
 end
