@@ -1,8 +1,10 @@
 <html>
+<input type="hidden" id="latitude" name="latitude" value=0 />
+<input type="hidden" id="longitude" name="longitude" value=0 />	
 <script type="text/javascript">
 function showPosition(position){
-	document.getElementById("Latitude").value  =  position.coords.latitude;
-	document.getElementById("Longitude").value =  position.coords.longitude;
+	document.getElementById("latitude").value  =  position.coords.latitude;
+	document.getElementById("longitude").value =  position.coords.longitude;
 
 }
 
@@ -10,8 +12,8 @@ if (navigator.geolocation){
 	navigator.geolocation.getCurrentPosition(showPosition);	
 }
 else{
-	document.getElementById("Latitude").value  =  0;
-	document.getElementById("Longitude").value =  0;
+	document.getElementById("latitude").value  =  0;
+	document.getElementById("longitude").value =  0;
 }
 
 function getPosition(){
@@ -20,11 +22,11 @@ function getPosition(){
 
 	}
 	else{
-		document.getElementById("Latitude").value  =  0;
-		document.getElementById("Longitude").value =  0;
+		document.getElementById("latitude").value  =  0;
+		document.getElementById("longitude").value =  0;
 	}
 }
 
-getPosition()
 </script>
+
 </html>

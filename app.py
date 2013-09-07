@@ -1,11 +1,17 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, request, render_template
+
 app = Flask(__name__)
 
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    if request.method == 'GET': 
+        return render_template('gps.html')
+    elif request.method == 'POST':
+        latitude = request.form['latitude']
+        longitude = request.form['longitude']
+        print "latitude %s" % latitude
+        print "longitude %s" % longitude
+        return "whee!"
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
