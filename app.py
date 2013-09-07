@@ -5,6 +5,10 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    return render_template("home.html")
+
+@app.route('/gps', methods=['GET', 'POST'])
+def gps():
     return render_template("gps.html")
 
 @app.route('/location/')
