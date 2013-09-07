@@ -18,3 +18,13 @@ function setup(){
 		}
 	}
 };
+
+function compare(other){
+	var friendsArray;
+	$.getJSON("https://graph.facebook.com/me/mutualfriends/" + other, function(data) {
+		friendsArray = other;
+	});
+	return friendsArray;
+};
+
+
