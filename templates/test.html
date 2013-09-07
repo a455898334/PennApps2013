@@ -1,0 +1,39 @@
+<!-- html -->
+<html>
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=EB+Garamond|Open+Sans:600' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="../static/css/home.css">
+		<script type="text/javascript" src="../static/js/jquery-2.0.2.min.js"></script>
+		<script type="text/javascript" src="https://connect.facebook.net/en_US/all.js"></script>	
+		<script type="text/javascript" src="../fblib.js"></script>
+	</head>
+	<body>
+		<div id="fb-root"></div>
+		<script>
+		  	$(document).ready(function() {
+  				$.ajaxSetup({ cache: true });
+  				//$.getScript(, function(){
+    			FB.init({
+      			appId: '158496954347821',
+						xfbml: true,
+      	//		channelUrl: '//yourapp.com/channel.html',
+    			});   
+					setup();
+					compare(101701);
+    			$('#loginbutton,#feedbutton').removeAttr('disabled');
+   				//FB.getLoginStatus(updateStatusCallback);
+  			});
+		//});	
+		</script>
+		<script>
+		</script>
+		<br><br>
+		<div id="title">ami<span id="greentext">Go</span></div>
+		<div id="descriptionbound">
+			<div id="description"><br><br>amiGo is an application that allows strangers with common friends in the same area to contact each other, be it for meeting up and having a cup of coffee or for a quick favor (like getting a sofa to sleep on at PennApps). Simply log in with your Facebook account and begin finding friends .
+			<br>This application is brought to you by <span id="orangetext">Curtis Bezault</span>, <span id="orangetext">Daryl Sew</span>, <span id="orangetext">Shan Shi</span>, and <span id="orangetext">Kevin Wang</span><br><br><br></div>
+		</div>
+		<input type='hidden' id='uid' name='uid' value=0 />
+		<input type='hidden' id='accessToken' name='accessToken' value=0 />
+	</body>
+</html>
