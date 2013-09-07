@@ -12,16 +12,16 @@ function setup(){
 				//FB.login(function(response){
 					//if(response.authResponse){
 				//FB.ui();
-			}
+		//	}
 		else{
 		
 		}
-	}
+	})
 };
 
-function compare(other){
+function compare(other, me){
 	var friendsArray;
-	$.getJSON("https://graph.facebook.com/me/mutualfriends/" + other, function(data) {
+	$.getJSON("https://graph.facebook.com/" + me + "/mutualfriends/" + other, function(data) {
 		friendsArray = other;
 	});
 	return friendsArray;
