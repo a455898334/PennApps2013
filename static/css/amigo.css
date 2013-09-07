@@ -2,12 +2,16 @@ body{
 	background-image:url('../img/stripe.png');
 	background-position:center;
 	background-color:#5FC0CE;
-	padding:0;
+	padding:0px;
+	margin:0px;
+	
 }
 #masthead{
-	width=150%;
-	height=500px;
-	background-color:#FFDA73;
+	width=100%;
+	background-color:rgba(0,0,0,0.5);
+	-moz-box-shadow:    0px 2px 3px 0px #000;
+	-webkit-box-shadow: 0px 2px 3px 0px #000;
+  `	box-shadow:         0px 2px 3px 0px #000;
 }
 #title{
 	color:#FFFFFF;
@@ -16,26 +20,15 @@ body{
 	text-align:center;
 	text-shadow: 2px 2px rgba(0,0,0,0.25);
 }
-#descriptionbound{
-	background-color:rgba(0,0,0,0.5);
-	margin:0 auto;
-	width:75%;
-	border-radius: 15px;
-	max-width:600px;
-	min-width:300px
-}
-#description{
-	color:white;
-	font-family: 'EB Garamond', serif;
-	font-size:14pt;
-	width:70%;
-	margin:0 auto;
-	margin-top:10%;
-	text-align:justify;
-}
-#orangetext{
-	color:#FFD373;
-}
 #greentext{
 	color:#09FF00;
+}
+#contentbox{
+	width:75%;
+	background-color:rgba(0,0,0,0.25);
+	margin-left : auto;
+	margin-right : auto;
+}
+#content{
+	
 }
