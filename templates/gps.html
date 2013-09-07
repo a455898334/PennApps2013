@@ -1,32 +1,43 @@
 <html>
-<input type="hidden" id="latitude" name="latitude" value=0 />
-<input type="hidden" id="longitude" name="longitude" value=0 />	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
 <script type="text/javascript">
-function showPosition(position){
-	document.getElementById("latitude").value  =  position.coords.latitude;
-	document.getElementById("longitude").value =  position.coords.longitude;
 
-}
+    var options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+    };
 
-if (navigator.geolocation){
-	navigator.geolocation.getCurrentPosition(showPosition);	
-}
-else{
-	document.getElementById("latitude").value  =  0;
-	document.getElementById("longitude").value =  0;
-}
+function success(pos) {
+    var crd = pos.coords;
+    var latitude = crd.latitude;
+    var longitude = crd.longitude;
+    console.log('Your current position is:');
+    console.log('Latitude : ' + crd.latitude);
+    console.log('Longitude: ' + crd.longitude);
+    console.log('More or less ' + crd.accuracy + ' meters.');
+    $.getJSON("/location/", {"lat": latitude, "lon": longitude});
 
-function getPosition(){
-	if (navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(showPosition);	
+};
 
-	}
-	else{
-		document.getElementById("latitude").value  =  0;
-		document.getElementById("longitude").value =  0;
-	}
-}
+function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+};
 
+
+$(document).ready(function() {
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+        //$.getJSON($SCRIPT_ROOT + '/location/')
+
+        });
 </script>
 
 </html>
