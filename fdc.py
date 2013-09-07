@@ -62,6 +62,7 @@ def set_fb_access_token(id, token):
 
     return True
 
+# Tests
 if __name__ == '__main__':
     print friends_of_friends_nearby(0.0,0.0)
     test_token = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))
