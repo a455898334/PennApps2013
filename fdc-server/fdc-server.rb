@@ -30,18 +30,18 @@ end
 
 get '/users' do
   content_type :json
-  unless params[:lat] and params[:long] and params[:radius]
+  unless params[:lat] and params[:lon] and params[:radius]
     return {success: false}.to_json
   end
   lat = params[:lat]
-  long = params[:long]
+  lon = params[:lon]
   radius = params[:radius]
   users_in_radius = []
   all_user_ids = redis.keys 'user:*'
   all_user_ids.each do |id|
-    user_data = redis.hmget id, 'lat', 'long', 'last_updated'
-    user = {lat: user_data[0], long: user_data[1], last_updated: user_data[2]}
-    dist = distance [lat.to_f, long.to_f], [user[:lat].to_f, user[:long].to_f]
+    user_data = redis.hmget id, 'lat', 'lon', 'last_updated'
+    user = {lat: user_data[0], lon: user_data[1], last_updated: user_data[2]}
+    dist = distance [lat.to_f, lon.to_f], [user[:lat].to_f, user[:lon].to_f]
     if dist < radius.to_f
       user[:id] = id[5..-1]
       users_in_radius << user
@@ -57,23 +57,23 @@ get '/user/:id' do
   unless redis.exists id
     return {success: false}.to_json
   end
-  user_data = redis.hmget id, 'lat', 'long', 'last_updated'
-  user = {lat: user_data[0], long: user_data[1], last_updated: user_data[2], id: params[:id]}
+  user_data = redis.hmget id, 'lat', 'lon', 'last_updated'
+  user = {lat: user_data[0], lon: user_data[1], last_updated: user_data[2], id: params[:id]}
   {success: true, user: user}.to_json
 end
 
 put '/user/:id' do
   content_type :json
   id = "user:#{params[:id]}"
-  unless params[:lat] and params[:long]
+  unless params[:lat] and params[:lon]
     return {success: false}.to_json
   end
   lat = params[:lat]
-  long = params[:long]
+  lon = params[:lon]
   last_updated = Time.now.to_i
   redis.hmset id,
     'lat', lat,
-    'long', long,
+    'lon', lon,
     'last_updated', last_updated
   {success: true}.to_json
 end

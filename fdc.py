@@ -11,8 +11,8 @@ import string
 def is_friend_of_friend(id):
     return True
 
-def friends_of_friends_nearby(latitude, longitude):
-    payload = {'lat': latitude, 'long': longitude, 'radius': 1}
+def friends_of_friends_nearby(lat, lon):
+    payload = {'lat': lat, 'lon': lon, 'radius': 1}
     r = requests.get('http://ec2-23-20-163-191.compute-1.amazonaws.com/users', params=payload).json()
     if not r['success']:
         print 'fail'
@@ -32,8 +32,8 @@ def get_user(id):
     user = r['user']
     return user
 
-def update_user_location(id, latitude, longitude):
-    payload = {'lat': latitude, 'long': longitude}
+def update_user_location(id, lat, lon):
+    payload = {'lat': lat, 'lon': lon}
     r = requests.put('http://ec2-23-20-163-191.compute-1.amazonaws.com/user/%d' % id, params=payload).json()
 
     if not r['success']:
