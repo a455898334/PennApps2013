@@ -12,7 +12,7 @@
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng({{myLat}}, {{myLon}}),
-          zoom: 10,
+          zoom: 18,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -23,7 +23,7 @@
 				map:map,
 				title:"{{x['id']}}"
 			});
-                var contentString{{x['id']}} = "<a href=\'http://www.facebook.com/{{x['id']}}\'><h1>{{x['name']}}</h1></a>";
+                var contentString{{x['id']}} = "<img src=\'https://graph.facebook.com/{{x['id']}}/picture\'><a href=\'http://www.facebook.com/{{x['id']}}\'><h1>{{x['name']}}</h1></a>";
                          var infowindow{{x['id']}} = new google.maps.InfoWindow({
                                        content: contentString{{x['id']}}
                                          });
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	<table class="people">
 		{% for x in peopleList %}
 			<tr><td>
-				<img src={{x.profPic}}></img>
+				<img src="https://graph.facebook.com/{{x['id']}}/picture">
                         </td><td>
                                 <a href="http://www.facebook.com/{{x['id']}}"><h1>{{x['name']}}</h1></a>
 			</td><td>
