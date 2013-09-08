@@ -24,14 +24,19 @@
             if (response.status === 'connected') {
                 var uid = response.authResponse.userID;
                 var accessToken = response.authResponse.accessToken;
-                console.log(uid);
-                console.log(accessToken)
+
+                loginHandler(uid, accessToken);
+                /* console.log(uid);
+                   console.log(accessToken)*/
             }
             else if (response.status === 'not_authorized') {
                 } else {
             }
         }
         );}   
+        function loginHandler(uid, accessToken){  
+            $.getJSON("/loginhandler", {"uid":uid, "accessToken":accessToken});
+        }
 </script>
 <br><br>
 <div class="title-home">ami<span class="greentext">Go</span></div>
