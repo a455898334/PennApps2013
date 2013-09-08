@@ -36,6 +36,8 @@ nosetests.xml
 .project
 .pydevproject
 
+venv
+
 # Ruby
 *.gem
 *.rbc
