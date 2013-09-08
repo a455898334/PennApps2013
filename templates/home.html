@@ -20,14 +20,14 @@
                         FB.getLoginStatus(function(response){
                             if(response.status === 'connected'){
                                 var accessToken = response.authresponse.accessToken;
-                                //console.log($.getJSON("https://graph.facebook.com/me).id);
+                               
+                                } //console.log($.getJSON("https://graph.facebook.com/me).id);
                                 //$.getJSON($SCRIPT_ROOT + "/POST", accessToken);
                                 else if(response.status === "not authorized"){
                                 }
                                 else{
                                 }
-                            })
-                        };
+                            });
 		</script>
 		<br><br>
 		<div id="title">ami<span id="greentext">Go</span></div>
