@@ -23,7 +23,6 @@
             }
         }
     }
-
     // Shows any overlays currently in the array
     function showOverlays() {
         if (markersArray) {
@@ -32,7 +31,6 @@
             }
         }
     }
-
     // Deletes all markers in the array by removing references to them
     function deleteOverlays() {
         if (markersArray) {
@@ -43,13 +41,12 @@
         }
     }
     function initialize(){
-        var a = new google.maps.LatLng({{myLat}},{{myLon}});
+        var a = new google.maps.LatLng(10,10);
         var mapOptions = {zoom:11,center: a,mapTypeId: google.maps.MapTypeId.HYBRID};
         map =  new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-        {% for x in peopleList %}
-        newMark = new google.maps.LatLng({{x[1]}},{{x[0]}});
-        addMarker(newMark, "{{x[2]}}");
-        {% endfor %}
+        
+        newMark = new google.maps.LatLng(10,22);
+        addMarker(newMark, "David");
         infowindow = new google.maps.InfoWindow({content: "holding..."});
         for (var i = 0; i < markersArray.length; i++) {
             var marker = markersArray[i];
@@ -62,9 +59,7 @@
     }
     //Adds a marker to the map, as well as storing in an array
 </script>
-{% endblock %}
 
-{% block content %}
 <div class="masthead">
     <br><br><br>
     <div class="title-amigo">ami<span class="greentext">Go</span></div>
