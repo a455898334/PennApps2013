@@ -10,12 +10,14 @@
 	<body>
 		<div id="fb-root"></div>
 		<script>
+                        var callback;
 			window.fbAsyncInit = function() {
 				FB.init({
 					appId : '158496954347821',
 					status: true, 
 					xfbml : true
 				});
+                                callback();
 			};
                       			(function(d, s, id){
 			 var js, fjs = d.getElementsByTagName(s)[0];
@@ -24,17 +26,20 @@
 			 js.src = "//connect.facebook.net/en_US/all.js";
 			 fjs.parentNode.insertBefore(js, fjs);
 		   }(document, 'script', 'facebook-jssdk'));
-  FB.getLoginStatus(function(response) {
+    function callback(){
+                 
+        FB.getLoginStatus(function(response) {
                             if (response.status === 'connected') {
-    var uid = response.authResponse.userID;
-    var accessToken = response.authResponse.accessToken;
-    console.log(uid);
-    console.log(accessToken);
-  } else if (response.status === 'not_authorized') {
-  } else {
-  }
- });
-
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;
+        console.log(uid);
+        console.log(accessToken)
+)};
+        } else if (response.status === 'not_authorized') {
+        } else {
+        }
+    }
+}   
 		</script>
 		<br><br>
 		<div id="title">ami<span id="greentext">Go</span></div>
