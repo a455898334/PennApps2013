@@ -23,7 +23,7 @@
 				map:map,
 				title:"{{x['id']}}"
 			});
-                var contentString{{x['id']}} = "<a href=\'http://www.facebook.com/{{x['id']}}\'><h1>{{x['id']}}</h1></a>";
+                var contentString{{x['id']}} = "<a href=\'http://www.facebook.com/{{x['id']}}\'><h1>{{x['name']}}</h1></a>";
                          var infowindow{{x['id']}} = new google.maps.InfoWindow({
                                        content: contentString{{x['id']}}
                                          });
@@ -88,7 +88,7 @@ $(document).ready(function() {
 			<tr><td>
 				<img src={{x.profPic}}></img>
                         </td><td>
-                                <a href="http://www.facebook.com/{{x['id']}}"><h1>{{x['id']}}</h1></a>
+                                <a href="http://www.facebook.com/{{x['id']}}"><h1>{{x['name']}}</h1></a>
 			</td><td>
 				{{x['num_mutual']}}
 			</td></tr>

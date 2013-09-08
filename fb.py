@@ -1,4 +1,4 @@
-import simplejson, urllib2
+import simplejson, urllib2, requests
 
 def find_mutual(uid1, uid2):
     uri = urllib2.Request("https://graph.facebook.com/" + uid1 + "/mutualfriends/" + uid2)
@@ -11,4 +11,8 @@ def num_mutual(uid):
     f = opener.open(uri)
     simplejson.load(f);
     return f.data.mutual_friend_count
+
+def get_name(id):
+    r = requests.get('https://graph.facebook.com/%d' % id).json()
+    return r['name']
 
