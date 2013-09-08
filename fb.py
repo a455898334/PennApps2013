@@ -1,7 +1,7 @@
 import simplejson, urllib2, requests
 
 def find_mutual(uid1, uid2):
-    uri = urllib2.Request("https://graph.facebook.com/" + uid1 + "/mutualfriends/" + uid2)
+    uri = urllib2.Request("https://graph.facebook.com/" + uid1 + "/mutualfriends/" + uid2 + &access_token=158496954347821|session['accessToken'])
     f = opener.open(uri)
     simplejson.load(f)
     return f.data
