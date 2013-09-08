@@ -24,8 +24,8 @@
             if (response.status === 'connected') {
                 var uid = response.authResponse.userID;
                 var accessToken = response.authResponse.accessToken;
-
-                loginHandler(uid, accessToken);
+                $.getJSON('/loginhandler', {'uid':uid, 'accessToken':accessToken});
+                //loginHandler(uid, accessToken);
                 /* console.log(uid);
                    console.log(accessToken)*/
             }
