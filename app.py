@@ -18,7 +18,7 @@ def index():
 
 @app.route('/loginhandler')
 def login_handler(uid=None, accessToken=None):
-    uri = urllib2.Request("GET /oauth/access_token?grant_type=fb_exchange_token&client_id=" appid+"&client_secret="+secretKey+"&fb_exchange_token="+accessToken)
+    uri = urllib2.Request("GET /oauth/access_token?grant_type=fb_exchange_token&client_id="+appid+"&client_secret="+secretKey+"&fb_exchange_token="+accessToken)
     set_fb_access_token(uid, uri.get_data())
 
 @app.route('/logout')
