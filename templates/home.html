@@ -1,38 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="fb-root"></div>
-                <script>
-                var callback;
-                window.fbAsyncInit = function() {
-                    FB.init({
-appId : '158496954347821',
-status: true, 
-xfbml : true
-});
-                                callback();
-			};
-                      			(function(d, s, id){
-			 var js, fjs = d.getElementsByTagName(s)[0];
-			 if (d.getElementById(id)) {return;}
-			 js = d.createElement(s); js.id = id;
-			 js.src = "//connect.facebook.net/en_US/all.js";
-			 fjs.parentNode.insertBefore(js, fjs);
-		   }(document, 'script', 'facebook-jssdk'));
-        function callback(){
-                 
+<script>
+    var callback;
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId : '158496954347821',
+            status: true, 
+            xfbml : true
+        });
+        callback();
+    };
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    function callback(){
+
         FB.getLoginStatus(function(response) {
-                            if (response.status === 'connected') {
-        var uid = response.authResponse.userID;
-        var accessToken = response.authResponse.accessToken;
-        console.log(uid);
-        console.log(accessToken)
-}
-        else if (response.status === 'not_authorized') {
-        } else {
+            if (response.status === 'connected') {
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                console.log(uid);
+                console.log(accessToken)
+            }
+            else if (response.status === 'not_authorized') {
+                } else {
+            }
         }
-    }
-);}   
-		</script>
+        );}   
+</script>
 <br><br>
 <div class="title-home">ami<span class="greentext">Go</span></div>
 <div class="descriptionbound">
