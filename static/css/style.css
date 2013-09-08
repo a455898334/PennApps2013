@@ -83,7 +83,7 @@ body {
 
 .people{
 	font-family:Tahoma,Geneva,sans-serif;
-	font-size:14pt;
+	
 	width=70%;
 	vertical-align: top;
     text-align: left;
@@ -96,4 +96,8 @@ body {
 
 .lastupdate{
 	font-size:10pt;
+}
+
+.name{
+	font-size:14pt;
 }
