@@ -9,17 +9,17 @@ appid = 158496954347821
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    #if 'username' in session:
-    session['username'] = '684997668'
-    message = 'Logged in as %s' % escape(session['username'])
-    me = fdc.get_user(int(session['username']))
-    nearby = fdc.friends_of_friends_nearby(me['lat'], me['lon'])
-    for user in nearby:
-        user['name'] = fb.get_name(int(user['id']))
-    return render_template('amigo.html', message=message, myLat=me['lat'], myLon=me['lon'], peopleList=nearby)
-    #else: 
-        # Connect to facebook
-        #return render_template('home.html') 
+    if 'username' in session:
+        session['username'] = '684997668'
+        message = 'Logged in as %s' % escape(session['username'])
+        me = fdc.get_user(int(session['username']))
+        nearby = fdc.friends_of_friends_nearby(me['lat'], me['lon'])
+        for user in nearby:
+            user['name'] = fb.get_name(int(user['id']))
+        return render_template('amigo.html', message=message, myLat=me['lat'], myLon=me['lon'], peopleList=nearby)
+    else: 
+        Connect to facebook
+        return render_template('home.html') 
 
 @app.route('/logout')
 def logout():
