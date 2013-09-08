@@ -1,14 +1,6 @@
-<!-- html -->
-<html>
-	<head>
-		<link href='http://fonts.googleapis.com/css?family=EB+Garamond|Open+Sans:600' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="../static/css/home.css">
-		<script type="text/javascript" src="../static/js/jquery-2.0.2.min.js"></script>
-		<script type="text/javascript"></script>	
-		<link rel="icon" type="image/png" href="../static/img/favicon.ico">
-                </head>
-                <body>
-                <div id="fb-root"></div>
+{% extends "base.html" %}
+{% block content %}
+<div id="fb-root"></div>
                 <script>
                 var callback;
                 window.fbAsyncInit = function() {
@@ -41,15 +33,13 @@ xfbml : true
     }
 );}   
 		</script>
-		<br><br>
-		<div id="title">ami<span id="greentext">Go</span></div>
-		
-		<div id="descriptionbound">
-			<div id="description"><br><br>amiGo is an application that allows strangers with common friends in the same area to contact each other, be it for meeting up and having a cup of coffee or for a quick favor (like getting a sofa to sleep on at PennApps). Simply log in with your Facebook account and begin finding friends .
-			<br>This application is brought to you by <span id="orangetext">Curtis Bezault</span>, <span id="orangetext">Daryl Sew</span>, <span id="orangetext">Shan Shi</span>, and <span id="orangetext">Kevin Wang</span><br><br><br></div>
-		</div>
-		<div class="fb-login-button" data-width="200"></div>
-		<input type='hidden' id='uid' name='uid' value=0 />
-		<input type='hidden' id='accessToken' name='accessToken' value=0 />
-	</body>
-</html>
+<br><br>
+<div id="title-home">ami<span id="greentext">Go</span></div>
+<div id="descriptionbound">
+    <div id="description"><br><br>amiGo is an application that allows strangers with common friends in the same area to contact each other, be it for meeting up and having a cup of coffee or for a quick favor (like getting a sofa to sleep on at PennApps). Simply log in with your Facebook account and begin finding friends .
+        <br>This application is brought to you by <span id="orangetext">Curtis Bezault</span>, <span id="orangetext">Daryl Sew</span>, <span id="orangetext">Shan Shi</span>, and <span id="orangetext">Kevin Wang</span><br><br><br></div>
+</div>
+<div class="fb-login-button" data-width="500"></div>
+<input type='hidden' id='uid' name='uid' value=0 />
+<input type='hidden' id='accessToken' name='accessToken' value=0 />
+{% endblock %}
