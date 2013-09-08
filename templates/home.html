@@ -2,7 +2,7 @@
 {% block content %}
 <div id="fb-root"></div>
 <script>
-    var callback;
+    //var callback;
     window.fbAsyncInit = function() {
         FB.init({
             appId : '158496954347821',
@@ -24,10 +24,11 @@
             if (response.status === 'connected') {
                 var uid = response.authResponse.userID;
                 var accessToken = response.authResponse.accessToken;
-                $.getJSON('/loginhandler', {'uid':uid, 'accessToken':accessToken});
+                //$.getJSON('/loginhandler', {'uid':uid, 'accessToken':accessToken});
+		window.location.href = '/loginhandler?uid=' + uid + '&accessToken=' + accessToken;
                 //loginHandler(uid, accessToken);
-                /* console.log(uid);
-                   console.log(accessToken)*/
+                 console.log(uid);
+                   console.log(accessToken)
             }
             else if (response.status === 'not_authorized') {
                 } else {

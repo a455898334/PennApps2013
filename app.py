@@ -22,12 +22,13 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-@app.route('/location/')
+@app.route('/location')
 def handle_location():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     # Save them to database somewhere?
-    return (lat, lon)
+    fdc.update_user_location(int(session['username']), lat, lon)
+    return redirect(url_for('index'))
 
 @app.route('/loginhandler')
 def handle_login():
@@ -41,8 +42,7 @@ def handle_login():
 
     fdc.set_fb_access_token(int(uid), accessToken)
 
-    # Save them to database somewhere?
-    return (uid, accessToken)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
