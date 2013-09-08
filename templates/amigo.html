@@ -21,9 +21,9 @@
 		google.maps.event.addDomListener(window, 'load', initialize);
 		{% for x in peopleList %}
 			var marker = new google.maps.Marker({
-				position:new google.maps.LatLng({{x.lat}},{{x.lon}}),
+				position:new google.maps.LatLng({{x['lat']}},{{x['lon']}}),
 				map:map,
-				title:{{x.name}}
+				title:{{x['id']}}
 			});
 		{% endfor %}
     </script>
