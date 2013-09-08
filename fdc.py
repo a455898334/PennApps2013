@@ -13,7 +13,7 @@ def is_friend_of_friend(id):
 
 def friends_of_friends_nearby(lat, lon):
     payload = {'lat': lat, 'lon': lon, 'radius': 1}
-    r = requests.get('http://ec2-23-20-163-191.compute-1.amazonaws.com/users', params=payload).json()
+    r = requests.get('http://ec2-23-20-163-191.compute-1.amazonaws.com:8001/users', params=payload).json()
     if not r['success']:
         print 'fail'
         return []
@@ -23,7 +23,7 @@ def friends_of_friends_nearby(lat, lon):
     return friends_of_friends_nearby
 
 def get_user(id):
-    r = requests.get('http://ec2-23-20-163-191.compute-1.amazonaws.com/user/%d' % id).json()
+    r = requests.get('http://ec2-23-20-163-191.compute-1.amazonaws.com:8001/user/%d' % id).json()
 
     if not r['success']:
         print 'fail'
@@ -34,7 +34,7 @@ def get_user(id):
 
 def update_user_location(id, lat, lon):
     payload = {'lat': lat, 'lon': lon}
-    r = requests.put('http://ec2-23-20-163-191.compute-1.amazonaws.com/user/%d' % id, params=payload).json()
+    r = requests.put('http://ec2-23-20-163-191.compute-1.amazonaws.com:8001/user/%d' % id, params=payload).json()
 
     if not r['success']:
         print 'fail'
@@ -43,7 +43,7 @@ def update_user_location(id, lat, lon):
     return True
 
 def get_fb_access_token(id):
-    r = requests.get('http://ec2-23-20-163-191.compute-1.amazonaws.com/user/%d/fb_access_token' % id).json()
+    r = requests.get('http://ec2-23-20-163-191.compute-1.amazonaws.com:8001/user/%d/fb_access_token' % id).json()
 
     if not r['success']:
         print 'fail'
@@ -54,7 +54,7 @@ def get_fb_access_token(id):
 
 def set_fb_access_token(id, token):
     payload = {'token': token}
-    r = requests.put('http://ec2-23-20-163-191.compute-1.amazonaws.com/user/%d/fb_access_token' % id, params=payload).json()
+    r = requests.put('http://ec2-23-20-163-191.compute-1.amazonaws.com:8001/user/%d/fb_access_token' % id, params=payload).json()
 
     if not r['success']:
         print 'fail'
