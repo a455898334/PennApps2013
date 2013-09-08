@@ -15,7 +15,7 @@ def find_mutual(uid1, uid2):
 
 def num_mutual(uid1, uid2):
     r = requests.get("https://graph.facebook.com/" + uid1 + "/mutualfriends/" + uid2 + "?access_token="+fdc.get_fb_access_token(uid)).json()
-    return len(f['data'])
+    return len(r['data'])
 
 def get_name(id):
     r = requests.get('https://graph.facebook.com/%d' % id).json()
