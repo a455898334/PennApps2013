@@ -1,224 +1,80 @@
-<!DOCTYPE HTML>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<link rel="stylesheet" type="text/css" href="../static/style.css" />
-<link rel="stylesheet" type="text/css" href="../static/Home.css" />
-<script src="../static/jquery.js" type="text/javascript"></script>
-<script type="text/javascript"    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAH35jXY2Yb5eApUzvZXuObiwFOpTC9xu0&sensor=true"> </script>
-<script src="../static/map.js" type="text/javascript"></script>
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjedh5W9golD6lhg9m81RgI20AF46wdXA&sensor=true"></script>
+<script type="text/javascript" src="https://connect.facebook.net/en_US/all.js"></script>	
 <script>
-var map;
-var markersArray = [];
-var newMark;
+    var map;
+    var markersArray = [];
+    var newMark;
+    function addMarker(location,user) {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map,    
+            user: user
+        });
+        markersArray.push(marker);
+    }
+    // Removes the overlays from the map, but keeps them in the array
+    function clearOverlays() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(null);
+            }
+        }
+    }
 
-function initialize() {
-	var a = new google.maps.LatLng(40.678555,-74.005966);
-	var mapOptions = {
-		zoom: 11	,
-		center: a,
-		mapTypeId: google.maps.MapTypeId.HYBRID
-	};
-	map =  new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-	{% for x in MessageList %}
-	newMark = new google.maps.LatLng({{x[1]}},{{x[0]}});
-	addMarker(newMark, "{{x[2]}}")	;
-	{% endfor %}
-	infowindow = new google.maps.InfoWindow({  	content: "holding..."  });
-	for (var i = 0; i < markersArray.length; i++) {
-  	  var marker = markersArray[i];
-  	  google.maps.event.addListener(marker, 'click', function () {
-  	  	infowindow.setContent(this.user);
-		infowindow.open(map, this);
-		map.setCenter(this.getPosition());
-	  });	 
-	}
-	
-}
+    // Shows any overlays currently in the array
+    function showOverlays() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(map);
+            }
+        }
+    }
+
+    // Deletes all markers in the array by removing references to them
+    function deleteOverlays() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(null);
+            }
+            markersArray.length = 0;
+        }
+    }
+    function initialize(){
+        var a = new google.maps.LatLng({{myLat}},{{myLon}});
+        var mapOptions = {zoom:11,center: a,mapTypeId: google.maps.MapTypeId.HYBRID};
+        map =  new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        {% for x in peopleList %}
+        newMark = new google.maps.LatLng({{x[1]}},{{x[0]}});
+        addMarker(newMark, "{{x[2]}}");
+        {% endfor %}
+        infowindow = new google.maps.InfoWindow({content: "holding..."});
+        for (var i = 0; i < markersArray.length; i++) {
+            var marker = markersArray[i];
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(this.user);
+                infowindow.open(map, this);
+                map.setCenter(this.getPosition());
+            });
+        }
+    }
+    //Adds a marker to the map, as well as storing in an array
 </script>
+{% endblock %}
 
-
-<body style="background-color=#D0D0D0">
-<div id="topbar" style="text-align:right; margin-right:10px; margin-top:2px">	
-<h2>hello <i>{{username}}</i></h2>	
+{% block content %}
+<div class="masthead">
+    <br><br><br>
+    <div class="title-amigo">ami<span class="greentext">Go</span></div>
+    <br><br><br>
 </div>
-
-<form method="POST"  style="display: inline; background-color: transparent;">
-<div class="centered">
-<table id="tbl" border="0">
-	<tr>
-
-		<td width=80>
-			<input id="dropbutt" class="selection" type="button" name="button" value="Drop" />
-		</td>
-		<td width=80>
-			<input id="browsebutt" class="selection" type="button" name="button" value="Browse" />
-		</td>
-		<td width=80>	
-			<input id="mapbutt" class="selection" type="button" name="button" value="Map" />
-		</td>
-		<td width=80>	
-			<input id="accountbutt" class="selection" type="button" name="button" value="My Msgs"/>
-		</td>
-		<td width=80>	
-			<input id="logoutbutt" class="selection" type="submit" name="button" value="Logout" />
-		</td>
-	</tr>
-</table>
+<br>
+<div class="content">
+    <div id="map" onload="initialize()">
+        <div id="map_canvas" style="width:95%; height:75%;"></div>
+    </div>
+    <div class="list"></div>
 </div>
-
-	 <input type="hidden" id="Latitude" name="Latitude" value=0 />
-	 <input type="hidden" id="Longitude" name="Longitude" value=0 />	 
-	<script src="../static/scripts.js" type="text/javascript"></script>
-
-<!--				PAGE 1					 -->
-<div class="page" id="drop" >
-	<div class="heading">
-	  <div style="color: #806B57"><span>Drop a Message</span></div>
-	  <div style="color:#4F4235">Drop a Message</div>
-	  </div>
-	<div style="margin-left:auto; margin-right:auto; width:25%">
-	<textarea id="txtarea" rows="6" cols="30" name="line"></textarea>
-	<input id="createm" type="submit" name="button" value="Create Message" />
-	<input id="clearem" type="button" name="button" value="Clear" />
-	</div>
-	<div class="slideout">
-		<img src="static/images/left-arrow-gray-hi.png" alt="More Info" height="50" width="35">
-		<img src="static/images/left-arrow-gray-hi.png" alt="More Info" height="50" width="35">
-		<!--	<div class="slideout1">
-			<div class="slideout_inner1" style="background-color:#FFE6CE">
-				<div style="width:100%; height:100%">
-					
-				</div>
-			</div>
-		</div> -->
-        <div class="slideout_inner" style="background-color:#FFE8D1">
-			<div style="width:350px; height:500px">
-				<div style="width:250px; height:300px; padding:10px; border:5px solid white; margin:32px">
-					<div style="color:gray; margin-left:5px">
-						<p><i>welcome to</i></p></div>
-						<center><h3>the Drop page</h3></center>
-						<p><center>
-							This page will allow you to 'drop' a message in your current 
-							GPS location. Simply enter a message in the provided area and press the
-							'create message' button. To verify that you have successfully dropped
-							your message, visit the 'Browse' or 'Account' pages.
-						</p></center>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-<!--				PAGE 2					 -->
-<div class="page" id="browse">
-	<div class="heading">
-	  <div style="color:#806666"><span>Browse Messages</span></div>
-	  <div style="color:#3B3131">Browse Messages</div>
-	</div>
-	<div style="margin-left:auto; margin-right:auto; width:400px">
-		{% if messages %}
-			<table id="msglist" style="width:400px;table-layout:fixed;background-color:#FFE6E6;border:4px solid black;border-collapse:collapse;word-wrap: break-word;table-layout: fixed">
-
-				<tr style="border:4px solid black">
-					<th style="border:4px solid black;width:100px;word-wrap: break-word">User</th>
-					<th style="border:4px solid black;width:200px;word-wrap: break-word">Message</th>
-					<th style="border:4px solid black;width:100px;word-wrap: break-word">Time</th>
-				</tr>		
-				{% for x in names %}
-				<tr style="border:4px solid black">
-					<td style="border:4px solid black;width:100px;word-wrap: break-word">{{x}}</td>											
-					<td style="border:4px solid black;width:200px;word-wrap: break-word">{{messages[loop.index0]}}</td>    
-					<td style="border:4px solid black;width:100px;word-wrap: break-word">{{time[loop.index0]}}</td>    
-					</tr>
-				{% endfor %}
-			</table>
-		{% else %}
-			<h1 style="font-family:pix">NO MESSAGES WITHIN AREA</h1> 
-		{% endif %}
-	</div>
-	<div class="slideout">
-		<img src="static/images/left-arrow-gray-hi.png" alt="More Info" height="50" width="35">
-		<img src="static/images/left-arrow-gray-hi.png" alt="More Info" height="50" width="35">
-	<!--	<div class="slideout1">
-			<div class="slideout_inner1" style="background-color:#FFDBDB">
-				<div style="width:100%; height:100%">
-					
-				</div>
-			</div>
-		</div> -->
-		<div class="slideout_inner" style="background-color:#FFCCCC">
-			<div style="width:350px; height:638px">
-			<div style="width:250px; height:250px; padding:10px; border:5px solid white; margin:32px">
-			  <div style="color:gray; margin-left:5px">
-			    <p><i>welcome to</i></p></div>
-				<center><h3>the Browse page</h3></center>
-				<p><center>This page will allow you to view all the messages dropped 
-				  by users within a 100m radius of your current GPS location. 
-				Refer to the map to see where different users have dropped their own messages.</p></center>
-			</div>
-		</div>
-	</div>
-</div>
-
-</div>
-
-
-<!--				PAGE 3					 -->
-
-<div class="page" id="map" bgcolor="#CEFEFF" onload="initialize()" ><br>
-    <div id="map_canvas" style="width:95%; height:75%;"></div>
-
-</div>
-
-
-
-<!--				PAGE 4					 -->
-<div class="page" id="account">
-<div class="heading">
-	  <div style="color:#46574E"><span>My Messages</span></div>
-	  <div style="color:#131715">My Messages</div>
-	  </div>
-	<div style="margin-left:auto; margin-right:auto; width:38%">
-	  {% if mymessages %}
-		         <table id="msglist" style="background-color:#CDFFE5;border:4px solid black;border-collapse:collapse">
-
-				<tr style="border:4px solid black">
-				<th style="border:4px solid black"><h3>Message</h3></th>
-				<th style="border:4px solid black"><h3>Time</h3></th>			
-				</tr>
-						
-				{% for x in mymessages %}
-					<tr style="border:4px solid black">
-					<td style="border:4px solid black">{{x[0]}}</td>
-					<td style="border:4px solid black">{{x[1]}}</td>	
-					</tr>
-				{% endfor %}
-			</table>
-		      {% else %}
-			 <h1>NO MESSAGES WITHIN AREA</h1> 
-		      {% endif %}
-			 </div>
-	<div class="slideout" >
-		<img src="static/images/left-arrow-gray-hi.png" alt="More Info" height="50" width="35">
-		<img src="static/images/left-arrow-gray-hi.png" alt="More Info" height="50" width="35">
-	<!--	<div class="slideout1">
-		  <div class="slideout_inner1" style="background-color: #CEE6DA">
-		    <div style="width:100%; height:100%; background-color: #CEE6DA">
-		      
-		    </div>
-		    </div>
-		  </div> -->
-	<div class="slideout_inner" style="background-color:#ADD6C1">
-		<div style="width:350px; height:638px">
-		<div style="width:250px; height:200px; padding:10px; border:5px solid white; margin:32px">
-			<div style="color:gray; margin-left:5px">
-			    <p><i>welcome to</i></p></div>
-				<center><h3>the My Messages page</h3></center>
-				<p><center>This page lists all of the messages you have dropped at any location,
-				and their dates and times.</p></center>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
-<script src="../static/Home.js" type="text/javascript"></script>
-</body>
+{% endblock %}
