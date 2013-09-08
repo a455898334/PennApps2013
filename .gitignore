@@ -37,6 +37,7 @@ nosetests.xml
 .pydevproject
 
 venv
+pidfile
 
 # Ruby
 *.gem
