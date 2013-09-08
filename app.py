@@ -13,22 +13,6 @@ def index():
         # Connect to facebook
         return render_template('home.html') 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    # Change this to keep track of fb user ID and the access key once
-    # a post request has been made
-    if request.method == 'POST':
-        session['username'] = request.form['username']
-        return redirect(url_for('index'))
-    else:
-        # Change this to return the required facebook oauth stuff.
-        return '''
-        <form action="" method="post">
-            <p><input type=text name=username>
-            <p[><input type=submit value=Login>
-        </form>
-    '''
-
 @app.route('/logout')
 def logout():
     # Remove the username from the session if it's there
@@ -39,7 +23,17 @@ def logout():
 def handle_location(lat=None, lon=None):
     lat = request.args.get('lat')
     lon = request.args.get('lon')
+    # Save them to database somewhere?
     return (lat, lon)
+
+@app.route('/loginhandler')
+def handle_login(uid=None, accessToken=None):
+    uid = request.args.get('uid')
+    accessToken = request.args.get('accessToken')
+    session['username'] = uid
+    session['token'] = accessToken
+    # Save them to database somewhere?
+    return (uid, accessToken)
 
 if __name__ == '__main__':
     app.run(debug=True)
