@@ -32,6 +32,9 @@ def handle_login(uid=None, accessToken=None):
     accessToken = request.args.get('accessToken')
     session['username'] = uid
     session['token'] = accessToken
+
+    print "UID %s" % uid
+    print "Access Token %s" % accessToken
     # Save them to database somewhere?
     return (uid, accessToken)
 
