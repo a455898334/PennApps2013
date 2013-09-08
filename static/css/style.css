@@ -59,8 +59,8 @@ body {
 }
 
 .fb-login-button {
-    margin-right:25%;
-    margin-left:auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .content {
@@ -69,9 +69,14 @@ body {
     margin-left : auto;
     margin-right : auto;
 }
+
 #map-canvas { 
 	height: 75%; 
 	width:75%;
 	margin-left : auto;
     margin-right : auto;
+}
+
+.center {
+    text-align: center;
 }
