@@ -39,7 +39,7 @@ def handle_login():
     print "UID %s" % uid
     print "Access Token %s" % accessToken
 
-    set_fb_access_token(uid, accessToken)
+    fdc.set_fb_access_token(int(uid), accessToken)
 
     # Save them to database somewhere?
     return (uid, accessToken)
