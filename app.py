@@ -18,7 +18,7 @@ def index():
             user['name'] = fb.get_name(int(user['id']))
         return render_template('amigo.html', message=message, myLat=me['lat'], myLon=me['lon'], peopleList=nearby)
     else: 
-        Connect to facebook
+        #Connect to facebook
         return render_template('home.html') 
 
 @app.route('/logout')
