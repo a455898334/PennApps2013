@@ -12,20 +12,27 @@
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng({{myLat}}, {{myLon}}),
-          zoom: 8,
+          zoom: 10,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
 		{% for x in peopleList %}
-			var marker = new google.maps.Marker({
+                var marker{{x['id']}} = new google.maps.Marker({
 				position:new google.maps.LatLng({{x['lat']}},{{x['lon']}}),
 				map:map,
-				title:{{x['id']}}
+				title:"{{x['id']}}"
 			});
+                var contentString{{x['id']}} = "<a href=\'http://www.facebook.com/{{x['id']}}\'><h1>{{x['id']}}</h1></a>";
+                         var infowindow{{x['id']}} = new google.maps.InfoWindow({
+                                       content: contentString{{x['id']}}
+                                         });
+                        google.maps.event.addListener(marker{{x['id']}}, 'click', function() {
+                                    infowindow{{x['id']}}.open(map,marker{{x['id']}});
+                      });
 		{% endfor %}
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 <script type="text/javascript">
 
@@ -43,8 +50,10 @@ function success(pos) {
     console.log('Latitude : ' + crd.latitude);
     console.log('Longitude: ' + crd.longitude);
     console.log('More or less ' + crd.accuracy + ' meters.');
-    $.getJSON("/location/", {"lat": latitude, "lon": longitude});
-    window.location.href = '/location?lat=' + latitude + '&lon=' + longitude;
+    $.getJSON("/location", {"lat": latitude, "lon": longitude});
+    setTimeout(60000, function() {
+            window.location.href = '/location?lat=' + latitude + '&lon=' + longitude;
+    });
 
 };
 
@@ -78,10 +87,10 @@ $(document).ready(function() {
 		{% for x in peopleList %}
 			<tr><td>
 				<img src={{x.profPic}}></img>
+                        </td><td>
+                                <a href="http://www.facebook.com/{{x['id']}}"><h1>{{x['id']}}</h1></a>
 			</td><td>
-				{{x.name}}
-			</td><td>
-				{{x.mutualFriends}}
+				{{x['num_mutual']}}
 			</td></tr>
 		{% endfor %}
 	</table>
