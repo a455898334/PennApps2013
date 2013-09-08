@@ -21,6 +21,8 @@
                             if (response.status === 'connected') {
     var uid = response.authResponse.userID;
     var accessToken = response.authResponse.accessToken;
+    console.log(uid);
+    console.log(accessToken);
   } else if (response.status === 'not_authorized') {
   } else {
   }
