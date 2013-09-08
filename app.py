@@ -15,6 +15,7 @@ def index():
         nearby = fdc.friends_of_friends_nearby(me['lat'], me['lon'])
         for user in nearby:
             user['name'] = fb.get_name(int(user['id']))
+            user['last_updated_string'] = misc.pretty_date(int(user['last_updated']))
         return render_template('amigo.html', message=message, myLat=me['lat'], myLon=me['lon'], peopleList=nearby)
     else: 
         #Connect to facebook
