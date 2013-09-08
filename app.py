@@ -6,15 +6,12 @@ app.secret_key = ']\x8d3\t\x0bD\xf9\xc5\x13\xb60\xebGdt$\xc0\x1eo\x12\xf1G\xd2\x
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    """
     if 'username' in session:
         message = 'Logged in as %s' % escape(session['username'])
         return render_template('amigo.html', message=message) 
     else: 
         # Connect to facebook
         return render_template('home.html') 
-    """
-    return render_template('amigo.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
