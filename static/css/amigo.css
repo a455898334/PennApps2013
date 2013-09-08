@@ -4,10 +4,9 @@ body{
 	background-color:#5FC0CE;
 	padding:0px;
 	margin:0px;
-	
 }
 #masthead{
-	width=100%;
+	width = 100%;
 	background-color:rgba(0,0,0,0.5);
 	-moz-box-shadow:    0px 2px 3px 0px #000;
 	-webkit-box-shadow: 0px 2px 3px 0px #000;
