@@ -50,8 +50,8 @@ function success(pos) {
     console.log('Latitude : ' + crd.latitude);
     console.log('Longitude: ' + crd.longitude);
     console.log('More or less ' + crd.accuracy + ' meters.');
-    $.getJSON("/location", {"lat": latitude, "lon": longitude});
-    setTimeout(60000, function() {
+    //$.getJSON("/location", {"lat": latitude, "lon": longitude});
+    setTimeout(10000, function() {
             window.location.href = '/location?lat=' + latitude + '&lon=' + longitude;
     });
 
