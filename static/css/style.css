@@ -80,3 +80,20 @@ body {
 .center {
     text-align: center;
 }
+
+.people{
+	font-family:Tahoma,Geneva,sans-serif;
+	font-size:14pt;
+	width=70%;
+	vertical-align: top;
+    text-align: left;
+}
+
+.mutual{
+	vertical-align: top;
+	text-align: right;
+}
+
+.lastupdate{
+	font-size:10pt;
+}

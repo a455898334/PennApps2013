@@ -89,8 +89,10 @@ $(document).ready(function() {
 				<img src="https://graph.facebook.com/{{x['id']}}/picture">
                         </td><td>
                                 <a href="http://www.facebook.com/{{x['id']}}"><h1>{{x['name']}}</h1></a>
-			</td><td>
+			</td><td class="lastupdate">
 				{{x['last_updated_string']}}
+			</td><td class="mutual">
+				{{x['num_mutual']}}
 			</td></tr>
 		{% endfor %}
 	</table>

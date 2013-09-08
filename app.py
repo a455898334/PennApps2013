@@ -16,6 +16,7 @@ def index():
         for user in nearby:
             user['name'] = fb.get_name(int(user['id']))
             user['last_updated_string'] = misc.pretty_date(int(user['last_updated']))
+			user['num_mutual'] = fb.num_mutual(int(me['id']),int(user['id']))
         return render_template('amigo.html', message=message, myLat=me['lat'], myLon=me['lon'], peopleList=nearby)
     else: 
         #Connect to facebook
