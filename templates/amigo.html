@@ -87,8 +87,8 @@ $(document).ready(function() {
 		{% for x in peopleList %}
 			<tr><td>
 				<img src="https://graph.facebook.com/{{x['id']}}/picture">
-			</td><td>
-				<a href="http://www.facebook.com/{{x['id']}}"><div class="name">{{x['name']}}</div></a>
+			</td><td class="name">
+				<a href="http://www.facebook.com/{{x['id']}}">{{x['name']}}</a>
 			</td><td class="lastupdate">
 				{{x['last_updated_string']}}
 			</td></tr>
