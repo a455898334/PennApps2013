@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-import fdc, fb
+import fdc, fb, foursquare
 
 app = Flask(__name__)
 
