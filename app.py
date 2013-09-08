@@ -16,11 +16,6 @@ def index():
         # Connect to facebook
         return render_template('home.html') 
 
-@app.route('/loginhandler')
-def login_handler(uid=None, accessToken=None):
-    uri = urllib2.Request("GET /oauth/access_token?grant_type=fb_exchange_token&client_id="+appid+"&client_secret="+secretKey+"&fb_exchange_token="+accessToken)
-    set_fb_access_token(uid, uri.get_data())
-
 @app.route('/logout')
 def logout():
     # Remove the username from the session if it's there
@@ -28,14 +23,14 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/location/')
-def handle_location(lat=None, lon=None):
+def handle_location():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     # Save them to database somewhere?
     return (lat, lon)
 
 @app.route('/loginhandler')
-def handle_login(uid=None, accessToken=None):
+def handle_login():
     uid = request.args.get('uid')
     accessToken = request.args.get('accessToken')
     session['username'] = uid
@@ -43,6 +38,9 @@ def handle_login(uid=None, accessToken=None):
 
     print "UID %s" % uid
     print "Access Token %s" % accessToken
+
+    set_fb_access_token(uid, accessToken)
+
     # Save them to database somewhere?
     return (uid, accessToken)
 
