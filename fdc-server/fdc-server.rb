@@ -3,8 +3,8 @@ require 'redis'
 require 'json'
 
 redis = Redis.new
-set :port, 80
-set :bind, '0.0.0.0'
+#set :port, 80
+#set :bind, '0.0.0.0'
 
 # Begin https://gist.github.com/j05h/673425
 class Numeric
